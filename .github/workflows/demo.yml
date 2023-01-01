@@ -17,3 +17,32 @@ jobs:
         with:
           name: sha256-windows-exe
           path: dist/sha256.exe
+
+  build-on-linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: install pyinstaller
+        run: pip install pyinstaller
+      - name: build binary
+        run: pyinstaller sha256.py -F
+      - name: upload binary file
+        uses: actions/upload-artifact@v3
+        with:
+          name: sha256-linux
+          path: dist/sha256
+  build-on-mac:
+    runs-on: macos-12
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: install pyinstaller
+        run: pip3 install pyinstaller
+      - name: build binary
+        run: pyinstaller sha256.py -F
+      - name: upload binary file
+        uses: actions/upload-artifact@v3
+        with:
+          name: sha256-mac
+          path: dist/sha256
