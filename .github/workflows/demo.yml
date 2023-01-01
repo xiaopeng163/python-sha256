@@ -12,3 +12,8 @@ jobs:
         run: pip install pyinstaller
       - name: build exe
         run: pyinstaller sha256.py -F
+      - name: upload exe file
+        uses: actions/upload-artifact@v3
+        with:
+          name: sha256-windows-exe
+          path: dist/sha256.exe
